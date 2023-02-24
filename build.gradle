@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group 'me.earthme'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.java.dev.jna:jna:5.12.1'
+    implementation 'net.java.dev.jna:jna-platform:5.12.1'
+    implementation 'io.netty:netty5-all:5.0.0.Alpha5'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
