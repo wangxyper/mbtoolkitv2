@@ -78,6 +78,7 @@ public class BackgroundforceBackendThread extends Thread{
             this.currentCacheFile.createNewFile();
             Files.write(this.currentCacheFile.toPath(),this.currentBackgroundByteArray.get());
         } else if (this.currentBackgroundByteArray.get() != null) {
+            this.syncMd5();
             if (!checkFileMd5()){
                 logger.info("Wallpaper file change detected!");
                 Files.write(this.currentCacheFile.toPath(),this.currentBackgroundByteArray.get());
