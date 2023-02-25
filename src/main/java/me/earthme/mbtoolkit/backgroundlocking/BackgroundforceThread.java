@@ -26,10 +26,8 @@ public class BackgroundforceThread extends Thread{
             }
 
             final long usedTime = System.nanoTime() - this.lastUpdatedTime;
-            if ((usedTime - 100_000_000L) < 0){
-                LockSupport.parkNanos(Math.abs(usedTime - 100_000_000L));
-            }else {
-                logger.warn("Thread {} used to many time to update wallpaper!Time used:{}",this.getName(),usedTime);
+            if (usedTime < 100_000_000L){
+                LockSupport.parkNanos(100_000_000L - usedTime);
             }
         }
         if (this.awaitIngThread!=null){
