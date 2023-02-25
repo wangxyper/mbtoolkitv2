@@ -4,9 +4,6 @@ import javax.swing.*;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/**
- * 动态壁纸的窗口，目前还没完成
- */
 @Deprecated
 public class WallpaperFrame extends JFrame implements Runnable{
     private final String filePath;

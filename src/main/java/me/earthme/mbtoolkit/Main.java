@@ -1,4 +1,4 @@
-package me.earthme;
+package me.earthme.mbtoolkit;
 
 public class Main {
     public static void main(String[] args) {

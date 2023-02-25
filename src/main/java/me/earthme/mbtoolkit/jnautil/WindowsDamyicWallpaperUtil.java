@@ -12,9 +12,6 @@ import java.util.concurrent.locks.LockSupport;
 import static com.sun.jna.platform.win32.WinUser.SMTO_NORMAL;
 import static com.sun.jna.platform.win32.WinUser.SW_HIDE;
 
-/**
- * 动态壁纸的窗口，目前还没完成
- */
 @Deprecated
 public class WindowsDamyicWallpaperUtil {
     private static final Executor taskPool = Executors.newSingleThreadExecutor();
