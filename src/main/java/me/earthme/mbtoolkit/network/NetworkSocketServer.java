@@ -17,6 +17,7 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 import me.earthme.mbtoolkit.network.handle.NettyServerHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.InetSocketAddress;
 
@@ -27,7 +28,7 @@ public class NetworkSocketServer {
     private ServerBootstrap serverBootstrap;
     private ChannelFuture channelFuture;
 
-    public void start(InetSocketAddress address){
+    public void start(@NotNull InetSocketAddress address){
         this.serverBootstrap = new ServerBootstrap();
         this.serverBootstrap.group(this.currentLoopGroup,this.eventExecutors)
                 .channel(NioServerSocketChannel.class)

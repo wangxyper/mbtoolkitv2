@@ -4,23 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14f94be8-1801-468b-aa26-4a4d9363d6cb" name="变更" comment="Add BackgroundforceThread">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceBackendThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NetworkSocketServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/util/MD5Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Log4j-charsets.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Log4j-config.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Log4j-events.dtd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Log4j-events.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Log4j-levels.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="14f94be8-1801-468b-aa26-4a4d9363d6cb" name="变更" comment="Add new things">
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/c2s/C2SSetBackGroundPacket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/data/ConfigFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/data/UserDataEntry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/manager/ConfigManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/manager/UserManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/dynmicwallpaper/WallpaperFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/dynmicwallpaper/WallpaperFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/jnautil/WindowsDamyicWallpaperUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/jnautil/WindowsDamyicWallpaperUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/ServerMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceBackendThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceBackendThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/dynmicwallpaper/DynamicWallpaperEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/dynmicwallpaper/DynamicWallpaperEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NetworkSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NetworkSocketServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/handle/NettyClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/handle/NettyClientHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +48,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -72,13 +69,39 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="应用程序.BackgroundforceBackendThread">
+  <component name="RunManager" selected="应用程序.UserDataEntry">
     <configuration name="BackgroundforceBackendThread" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="me.earthme.mbtoolkit.backgroundlocking.BackgroundforceBackendThread" />
       <module name="mbtoolkitv2.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="me.earthme.mbtoolkit.backgroundlocking.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DynamicWallpaperEngine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="me.earthme.mbtoolkit.dynmicwallpaper.DynamicWallpaperEngine" />
+      <module name="mbtoolkitv2.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="me.earthme.mbtoolkit.dynmicwallpaper.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserDataEntry" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="me.earthme.mbtoolkit.server.data.UserDataEntry" />
+      <module name="mbtoolkitv2.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="me.earthme.mbtoolkit.server.data.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -101,8 +124,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.BackgroundforceBackendThread" />
+        <item itemvalue="应用程序.UserDataEntry" />
+        <item itemvalue="应用程序.DynamicWallpaperEngine" />
         <item itemvalue="应用程序.WindowsDamyicWallpaperUtil" />
+        <item itemvalue="应用程序.BackgroundforceBackendThread" />
       </list>
     </recent_temporary>
   </component>
@@ -122,13 +147,45 @@
       <option name="project" value="LOCAL" />
       <updated>1677242985152</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add base functions">
+      <created>1677286588043</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1677286588043</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Remove waring in BackgroundforceThread">
+      <created>1677286961768</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1677286961768</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fix some bug in BackgroundforceBackendThread and fix Dynamic Wallpaper part">
+      <created>1677295764665</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1677295764665</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add new things">
+      <created>1677307242377</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1677307242378</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Init some source" />
     <MESSAGE value="Init some sources" />
     <MESSAGE value="Add BackgroundforceThread" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add BackgroundforceThread" />
+    <MESSAGE value="Add base functions" />
+    <MESSAGE value="Remove waring in BackgroundforceThread" />
+    <MESSAGE value="Fix some bug in BackgroundforceBackendThread and fix Dynamic Wallpaper part" />
+    <MESSAGE value="Add new things" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add new things" />
   </component>
 </project>

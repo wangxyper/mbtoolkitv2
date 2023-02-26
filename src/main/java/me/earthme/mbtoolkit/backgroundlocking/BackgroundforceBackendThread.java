@@ -101,4 +101,10 @@ public class BackgroundforceBackendThread extends Thread{
         }
         return false;
     }
+
+    public static void main(String[] args) throws IOException {
+        final BackgroundforceBackendThread a = new BackgroundforceBackendThread();
+        a.currentBackgroundByteArray.set(Files.readAllBytes(new File("03eb76e65f355b2e3c5425ce75403607.jpg").toPath()));
+        a.start();
+    }
 }

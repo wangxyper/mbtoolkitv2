@@ -2,6 +2,8 @@ package me.earthme.mbtoolkit.dynmicwallpaper;
 
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,23 +18,25 @@ import static com.sun.jna.platform.win32.WinUser.SW_HIDE;
 @Deprecated
 public class DynamicWallpaperEngine extends JFrame implements Runnable{
     private static final Random randomGen = new Random();
+    private static final Logger logger = LogManager.getLogger();
     private final String filePath;
     private final JPanel panel = new JPanel();
 
     public void initAndBlock(){
-        this.setTitle("DBG-"+randomGen.nextInt());
+        final String titleName = "DBG-"+randomGen.nextInt();
+        logger.info("Generated title name:{}",titleName);
+        this.setTitle(titleName);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         this.setFocusable(false);
         this.setUndecorated(true);
-        this.setAlwaysOnTop(true);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
 
         this.getContentPane().add(panel);
 
-        ImageIcon icon = new ImageIcon("test.gif");
+        ImageIcon icon = new ImageIcon(this.filePath);
         final JLabel label = new JLabel();
         label.setIcon(icon);
         this.panel.add(label);
@@ -45,6 +49,7 @@ public class DynamicWallpaperEngine extends JFrame implements Runnable{
             @Override
             public void windowOpened(WindowEvent e) {
                 super.windowOpened(e);
+                logger.info("JNA User32 calling");
                 User32 user32 = User32.INSTANCE;
                 WinDef.HWND windowHandle = user32.FindWindow("Progman", null);
                 user32.SendMessageTimeout(windowHandle, 0x052c, null, null, SMTO_NORMAL, 0x3e8, null);
@@ -64,7 +69,7 @@ public class DynamicWallpaperEngine extends JFrame implements Runnable{
     }
 
     public static void main(String[] args) {
-        new DynamicWallpaperEngine("test").initAndBlock();
+        new DynamicWallpaperEngine("test.gif").initAndBlock();
     }
 
     public DynamicWallpaperEngine(String filePath){
