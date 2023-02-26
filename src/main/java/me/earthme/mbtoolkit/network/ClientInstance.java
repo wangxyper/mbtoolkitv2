@@ -30,21 +30,23 @@ public class ClientInstance {
 
     public void connect(InetSocketAddress socketAddress) throws InterruptedException {
         this.lastAddress = socketAddress;
-        this.bootstrap.group(this.loopGroup)
-                .channel(NioSocketChannel.class)
-                .option(ChannelOption.TCP_NODELAY,true)
-                .option(ChannelOption.SO_KEEPALIVE,true)
-                .handler(new ChannelInitializer<Channel>() {
-                    @Override
-                    protected void initChannel(@NotNull Channel ch) {
-                        ch.pipeline()
-                                .addLast(new LengthFieldBasedFrameDecoder(2077721600,0,4,0,4))
-                                .addLast(new LengthFieldPrepender(4))
-                                .addLast(new MessageDecoder())
-                                .addLast(new MessageEncoder())
-                                .addLast(new NettyClientHandler());
-                    }
-                });
+        if (!this.flag){
+            this.bootstrap.group(this.loopGroup)
+                    .channel(NioSocketChannel.class)
+                    .option(ChannelOption.TCP_NODELAY,true)
+                    .option(ChannelOption.SO_KEEPALIVE,true)
+                    .handler(new ChannelInitializer<Channel>() {
+                        @Override
+                        protected void initChannel(@NotNull Channel ch) {
+                            ch.pipeline()
+                                    .addLast(new LengthFieldBasedFrameDecoder(2077721600,0,4,0,4))
+                                    .addLast(new LengthFieldPrepender(4))
+                                    .addLast(new MessageDecoder())
+                                    .addLast(new MessageEncoder())
+                                    .addLast(new NettyClientHandler());
+                        }
+                    });
+        }
         this.future = this.bootstrap.connect(socketAddress).sync();
         logger.info("Connected to server");
         if (!flag){
@@ -52,6 +54,8 @@ public class ClientInstance {
                 while (this.shouldRun){
                     try {
                         this.blockUntilDisconnected();
+                        this.future.channel().close();
+                        Thread.sleep(3000);
                         logger.info("Connection lost!Reconnecting to server");
                         if (this.shouldRun){
                             this.connect(this.lastAddress);

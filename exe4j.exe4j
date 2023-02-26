@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exe4j version="8.0" transformSequenceNumber="3">
+  <directoryPresets config="C:/Users/Administrator/Desktop/mbtoolkitv2/build/libs" />
+  <application name="mbtoolkit" distributionSourceDir="C:/Users/Administrator/Desktop/mbtoolkitv2" />
+  <executable name="mbtoolkit" wrapperType="embed" executableMode="gui" serviceDescription="Simple,fast toolkit" dpiAware="false" />
+  <java mainClass="me.earthme.mbtoolkit.Main" vmParameters="-server -Dfile.encoding=utf-8" minVersion="1.8" maxVersion="17" allowBetaVM="true">
+    <searchSequence>
+      <envVar name="JAVA_HOME" />
+      <envVar name="JDK_HOME" />
+      <directory location="./jre" />
+    </searchSequence>
+    <classPath>
+      <archive location="C:/Users/Administrator/Desktop/mbtoolkitv2/build/libs/mbtoolkit-full-1.0-SNAPSHOT-all.jar" failOnError="false" />
+    </classPath>
+  </java>
+</exe4j>

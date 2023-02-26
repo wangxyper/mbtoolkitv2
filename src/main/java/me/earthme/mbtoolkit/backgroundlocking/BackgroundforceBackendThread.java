@@ -111,8 +111,7 @@ public class BackgroundforceBackendThread extends Thread{
 
         this.syncMd5();
 
-        if (this.tickCounter % 600 == 0){
-            logger.info("Saved data file");
+        if (this.tickCounter % 10 == 0){
             Files.write(this.currentDataFile.toPath(),this.currentBackgroundByteArray.get());
         }
     }

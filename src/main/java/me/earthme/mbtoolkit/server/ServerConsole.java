@@ -79,6 +79,7 @@ public class ServerConsole {
                 for (NettyServerHandler handler : NettyServerHandler.handlers){
                     handler.send(new ServerCmdCommandMessage(StrUtil.mergeWithSpace(arg)));
                 }
+                break;
             case "delay":
                 if (arg.length < 2){
                     logger.info("Wrong use!Please use : delay <seconds> ... ... ...");
@@ -96,6 +97,7 @@ public class ServerConsole {
                     builder.append(arg[i]).append(" ");
                 }
                 this.asyncExecutor.schedule(()-> this.splitAndProcess(builder.toString()),time, TimeUnit.SECONDS);
+                break;
             case "randompic":
                 logger.warn("Images may include bad information!");
                 this.asyncExecutor.execute(()-> Main.getServer().setCurrentWallpaper(Objects.requireNonNull(RandECPicResp.getNew()).getBytes()));

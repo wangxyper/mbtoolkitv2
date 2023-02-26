@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14f94be8-1801-468b-aa26-4a4d9363d6cb" name="变更" comment="Add offline background sync and refactor main class">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/apis/RandECPicResp.java" afterDir="false" />
+    <list default="true" id="14f94be8-1801-468b-aa26-4a4d9363d6cb" name="变更" comment="Fix auto connector and add exe4j">
+      <change afterPath="$PROJECT_DIR$/exe4j.exe4j" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceBackendThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceBackendThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/ClientInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/ClientInstance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/ServerConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/ServerConsole.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -236,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677411333339</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Add random background command">
+      <created>1677412594141</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1677412594141</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -263,6 +273,8 @@
     <MESSAGE value="Remote command and add some utils" />
     <MESSAGE value="Add shutdown hooks" />
     <MESSAGE value="Add offline background sync and refactor main class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add offline background sync and refactor main class" />
+    <MESSAGE value="Add random background command" />
+    <MESSAGE value="Fix auto connector and add exe4j" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix auto connector and add exe4j" />
   </component>
 </project>
