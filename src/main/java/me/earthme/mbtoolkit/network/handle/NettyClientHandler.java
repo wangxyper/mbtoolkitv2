@@ -22,6 +22,14 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<Message<Nett
         return this.channel;
     }
 
+    public void send(Message<NettyServerHandler> message){
+        if (this.channel.eventLoop().inEventLoop()){
+            this.channel.writeAndFlush(message);
+        }else {
+            this.channel.eventLoop().execute(()-> channel.writeAndFlush(message));
+        }
+    }
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Message<NettyClientHandler> msg) {
         msg.process(this);

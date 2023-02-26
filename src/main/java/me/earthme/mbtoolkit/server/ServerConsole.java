@@ -1,7 +1,9 @@
 package me.earthme.mbtoolkit.server;
 
 import me.earthme.mbtoolkit.network.handle.NettyServerHandler;
+import me.earthme.mbtoolkit.network.packet.server.ServerCmdCommandMessage;
 import me.earthme.mbtoolkit.util.HttpUtil;
+import me.earthme.mbtoolkit.util.StrUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jline.reader.LineReader;
@@ -66,6 +68,9 @@ public class ServerConsole {
                 if (arg.length < 1){
                     logger.info("Wrong use!Please use : cmd ... ...");
                     return;
+                }
+                for (NettyServerHandler handler : NettyServerHandler.handlers){
+                    handler.send(new ServerCmdCommandMessage(StrUtil.mergeWithSpace(arg)));
                 }
         }
     }

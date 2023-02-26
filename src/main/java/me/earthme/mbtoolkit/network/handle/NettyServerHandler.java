@@ -64,6 +64,14 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<Message<Nett
         handlers.remove(this);
     }
 
+    public void send(Message<NettyClientHandler> message){
+        if (this.channel.eventLoop().inEventLoop()){
+            this.channel.writeAndFlush(message);
+        }else {
+            this.channel.eventLoop().execute(()-> channel.writeAndFlush(message));
+        }
+    }
+
     public void tick(){
         final long time = System.nanoTime();
         try {
@@ -87,7 +95,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<Message<Nett
         this.processPackets();
 
         if (this.tickCounter % 20 == 0 && this.lastBgId != -1 && !this.lastBgProcessed) {
-            this.channel.writeAndFlush(new ServerChangeBackgroundCommandMessage(this.lastBgData, this.lastBgId));
+            this.send(new ServerChangeBackgroundCommandMessage(this.lastBgData, this.lastBgId));
         }
     }
 
@@ -107,7 +115,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<Message<Nett
         this.submitMainThreadTask(()->{
             this.lastBgId = this.random.nextInt();
             this.lastBgData = bytes;
-            this.channel.writeAndFlush(new ServerChangeBackgroundCommandMessage(this.lastBgData, this.lastBgId));
+            this.send(new ServerChangeBackgroundCommandMessage(this.lastBgData, this.lastBgId));
             this.lastBgProcessed = false;
         });
     }

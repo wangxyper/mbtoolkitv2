@@ -45,6 +45,6 @@ public class ServerChangeBackgroundCommandMessage implements Message<NettyClient
     @Override
     public void process(NettyClientHandler clientHandler) {
         ServerMain.getBackgroundForceThread().setBackground(this.data);
-        clientHandler.getChannel().writeAndFlush(new ClientBackgroundChangedPacket(this.id));
+        clientHandler.send(new ClientBackgroundChangedPacket(this.id));
     }
 }
