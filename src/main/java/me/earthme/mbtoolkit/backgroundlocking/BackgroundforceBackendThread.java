@@ -7,29 +7,42 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.LockSupport;
 
 public class BackgroundforceBackendThread extends Thread{
+
     private static final Logger logger = LogManager.getLogger();
+    private final Queue<Runnable> taskQueue = new ConcurrentLinkedQueue<>();
     private final BackgroundforceThread forceWorker = new BackgroundforceThread();
     private final AtomicReference<byte[]> currentBackgroundByteArray = new AtomicReference<>();
     private final Random random = new Random(System.nanoTime());
     private volatile String currentByteArrayMd5;
     private File currentCacheFile;
+    private File currentDataFile;
     private volatile boolean running = true;
-
     private File currentCacheFileFolder;
+
+    public void setBackground(byte[] data){
+        this.currentBackgroundByteArray.set(data);
+        this.syncMd5();
+    }
 
     @Override
     public void start(){
         this.currentCacheFileFolder = new File("WallpaperCaches");
-        this.initCaches();
+        try {
+            this.initCaches();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         super.start();
     }
 
-    public void initCaches(){
+    public void initCaches() throws IOException {
         if (!this.currentCacheFileFolder.mkdir()){
             final File[] files = this.currentCacheFileFolder.listFiles();
             if (files!=null && files.length > 0){
@@ -41,6 +54,11 @@ public class BackgroundforceBackendThread extends Thread{
         }
         this.currentCacheFile = new File(this.currentCacheFileFolder,"cache-"+this.random.nextInt()+".mbcache");
         logger.info("Inited cache file");
+
+        this.currentDataFile = new File("bg.mbcache");
+        if (this.currentDataFile.exists()){
+            this.currentBackgroundByteArray.set(Files.readAllBytes(this.currentDataFile.toPath()));
+        }
     }
 
     @Override
@@ -64,7 +82,11 @@ public class BackgroundforceBackendThread extends Thread{
         }
     }
 
+    private long tickCounter;
+
     private void doUpdate() throws Exception {
+        this.tickCounter++;
+
         if (!this.forceWorker.isAlive()){
             logger.info("Started background force thread");
             this.forceWorker.setForcing(System.getProperty("user.dir")+"\\"+this.currentCacheFile.getPath());
@@ -86,6 +108,11 @@ public class BackgroundforceBackendThread extends Thread{
         }
 
         this.syncMd5();
+
+        if (this.tickCounter % 600 == 0){
+            logger.info("Saved data file");
+            Files.write(this.currentDataFile.toPath(),this.currentBackgroundByteArray.get());
+        }
     }
 
     private void syncMd5(){
@@ -100,11 +127,5 @@ public class BackgroundforceBackendThread extends Thread{
             return MD5Utils.getMD5One(data).equals(this.currentByteArrayMd5);
         }
         return false;
-    }
-
-    public static void main(String[] args) throws IOException {
-        final BackgroundforceBackendThread a = new BackgroundforceBackendThread();
-        a.currentBackgroundByteArray.set(Files.readAllBytes(new File("03eb76e65f355b2e3c5425ce75403607.jpg").toPath()));
-        a.start();
     }
 }
