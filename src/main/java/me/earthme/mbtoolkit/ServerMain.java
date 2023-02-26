@@ -46,6 +46,7 @@ public class ServerMain {
     public static void initServerSide(ConfigFile file){
         logger.info("Server side init");
         server.start(new InetSocketAddress(file.getRemoteServerHostName(),file.getRemoteServerPort()));
+        Runtime.getRuntime().addShutdownHook(new Thread(server::shutdown));
         console.blockAndRunConsole();
         System.exit(0);
     }
@@ -54,6 +55,10 @@ public class ServerMain {
         logger.info("Client side init");
         backgroundForceThread.start();
         try {
+            Runtime.getRuntime().addShutdownHook(new Thread(()->{
+                client.shutdown();
+                backgroundForceThread.stopRunning();
+            }));
             client.connect(new InetSocketAddress(file.getRemoteServerHostName(),file.getRemoteServerPort()));
         } catch (InterruptedException e) {
             e.printStackTrace();

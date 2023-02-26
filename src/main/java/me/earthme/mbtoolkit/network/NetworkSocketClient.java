@@ -9,8 +9,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
 import me.earthme.mbtoolkit.network.codec.MessageDecoder;
 import me.earthme.mbtoolkit.network.codec.MessageEncoder;
 import me.earthme.mbtoolkit.network.handle.NettyClientHandler;
@@ -19,7 +17,6 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.locks.LockSupport;
 
 public class NetworkSocketClient {
@@ -29,6 +26,7 @@ public class NetworkSocketClient {
     private ChannelFuture future;
     private InetSocketAddress lastAddress;
     private boolean flag = false;
+    private volatile boolean shouldRun = true;
 
     public void connect(InetSocketAddress socketAddress) throws InterruptedException {
         this.lastAddress = socketAddress;
@@ -51,11 +49,13 @@ public class NetworkSocketClient {
         logger.info("Connected to server");
         if (!flag){
             final Thread reconnector = new Thread(()->{
-                while (true){
+                while (this.shouldRun){
                     try {
                         this.blockUntilDisconnected();
                         logger.info("Connection lost!Reconnecting to server");
-                        this.connect(this.lastAddress);
+                        if (this.shouldRun){
+                            this.connect(this.lastAddress);
+                        }
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -68,8 +68,14 @@ public class NetworkSocketClient {
         }
     }
 
+    public void shutdown(){
+        this.shouldRun = false;
+        this.future.channel().close();
+        this.loopGroup.shutdownGracefully();
+    }
+
     public void blockUntilDisconnected(){
-        while (this.future.channel().isOpen()){
+        while (this.future.channel().isOpen() && this.shouldRun){
             LockSupport.parkNanos(1000_000_000);
         }
     }

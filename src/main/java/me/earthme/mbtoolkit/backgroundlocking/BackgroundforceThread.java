@@ -8,7 +8,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.LockSupport;
 
 public class BackgroundforceThread extends Thread{
-    private static final Logger logger = LogManager.getLogger();
     private final AtomicReference<String> currentWallpaper = new AtomicReference<>();
     private long lastUpdatedTime;
     private volatile boolean running = true;
