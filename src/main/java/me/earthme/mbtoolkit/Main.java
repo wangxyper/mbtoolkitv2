@@ -1,8 +1,8 @@
 package me.earthme.mbtoolkit;
 
 import me.earthme.mbtoolkit.backgroundlocking.BackgroundforceBackendThread;
-import me.earthme.mbtoolkit.network.NetworkSocketClient;
-import me.earthme.mbtoolkit.network.NetworkSocketServer;
+import me.earthme.mbtoolkit.network.ClientInstance;
+import me.earthme.mbtoolkit.network.ServerInstance;
 import me.earthme.mbtoolkit.server.ServerConsole;
 import me.earthme.mbtoolkit.server.data.ConfigFile;
 import me.earthme.mbtoolkit.server.manager.ConfigManager;
@@ -13,10 +13,10 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-public class ServerMain {
+public class Main {
     private static final BackgroundforceBackendThread backgroundForceThread = new BackgroundforceBackendThread();
-    private static final NetworkSocketServer server = new NetworkSocketServer();
-    private static final NetworkSocketClient client = new NetworkSocketClient();
+    private static final ServerInstance server = new ServerInstance();
+    private static final ClientInstance client = new ClientInstance();
     private static final Logger logger = LogManager.getLogger();
     private static final ServerConsole console;
 
@@ -26,6 +26,14 @@ public class ServerMain {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static ServerInstance getServer() {
+        return server;
+    }
+
+    public static ClientInstance getClient() {
+        return client;
     }
 
     @NotNull

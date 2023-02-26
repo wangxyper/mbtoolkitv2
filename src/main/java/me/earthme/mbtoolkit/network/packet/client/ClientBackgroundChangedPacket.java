@@ -1,7 +1,7 @@
 package me.earthme.mbtoolkit.network.packet.client;
 
 import io.netty.buffer.ByteBuf;
-import me.earthme.mbtoolkit.network.handle.NettyServerHandler;
+import me.earthme.mbtoolkit.network.handler.NettyServerHandler;
 import me.earthme.mbtoolkit.network.packet.Message;
 
 public class ClientBackgroundChangedPacket implements Message<NettyServerHandler> {

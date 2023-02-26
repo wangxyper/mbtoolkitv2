@@ -45,5 +45,5 @@ test {
 }
 
 application {
-    mainClassName = 'me.earthme.mbtoolkit.ServerMain'
+    mainClassName = 'me.earthme.mbtoolkit.Main'
 }

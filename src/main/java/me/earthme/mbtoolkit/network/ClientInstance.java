@@ -11,7 +11,7 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 import me.earthme.mbtoolkit.network.codec.MessageDecoder;
 import me.earthme.mbtoolkit.network.codec.MessageEncoder;
-import me.earthme.mbtoolkit.network.handle.NettyClientHandler;
+import me.earthme.mbtoolkit.network.handler.NettyClientHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import java.net.InetSocketAddress;
 import java.util.concurrent.locks.LockSupport;
 
-public class NetworkSocketClient {
+public class ClientInstance {
     private static final Logger logger = LogManager.getLogger();
     private final NioEventLoopGroup loopGroup = new NioEventLoopGroup();
     private final Bootstrap bootstrap = new Bootstrap();

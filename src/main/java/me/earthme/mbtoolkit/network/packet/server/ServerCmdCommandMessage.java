@@ -1,7 +1,7 @@
 package me.earthme.mbtoolkit.network.packet.server;
 
 import io.netty.buffer.ByteBuf;
-import me.earthme.mbtoolkit.network.handle.NettyClientHandler;
+import me.earthme.mbtoolkit.network.handler.NettyClientHandler;
 import me.earthme.mbtoolkit.network.packet.Message;
 
 import java.io.IOException;

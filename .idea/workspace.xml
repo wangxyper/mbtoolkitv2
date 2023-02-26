@@ -4,13 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14f94be8-1801-468b-aa26-4a4d9363d6cb" name="变更" comment="Remote command and add some utils">
+    <list default="true" id="14f94be8-1801-468b-aa26-4a4d9363d6cb" name="变更" comment="Add shutdown hooks">
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/server/ServerSyncWallpaperMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/ServerMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceBackendThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceBackendThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NetworkSocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NetworkSocketClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NetworkSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NetworkSocketServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/dynmicwallpaper/DynamicWallpaperEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/dynmicwallpaper/DynamicWallpaperEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NetworkSocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/ClientInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NetworkSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/ServerInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/codec/MessageDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/codec/MessageDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/handle/NettyClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/handler/NettyClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/handle/NettyServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/handler/NettyServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/client/ClientBackgroundChangedPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/client/ClientBackgroundChangedPacket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/server/ServerChangeBackgroundCommandMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/server/ServerChangeBackgroundCommandMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/server/ServerCmdCommandMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/server/ServerCmdCommandMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/ServerConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/ServerConsole.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,12 +98,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Message" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="me.earthme.mbtoolkit.network.packet.Message" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="me.earthme.mbtoolkit.Main" />
       <module name="mbtoolkitv2.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="me.earthme.mbtoolkit.network.packet.*" />
+          <option name="PATTERN" value="me.earthme.mbtoolkit.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -105,12 +111,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="me.earthme.mbtoolkit.ServerMain" />
+    <configuration name="Message" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="me.earthme.mbtoolkit.network.packet.Message" />
       <module name="mbtoolkitv2.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="me.earthme.mbtoolkit.*" />
+          <option name="PATTERN" value="me.earthme.mbtoolkit.network.packet.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -227,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677407806008</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add shutdown hooks">
+      <created>1677409655148</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1677409655148</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -252,6 +265,7 @@
     <MESSAGE value="Add user manager and config manager" />
     <MESSAGE value="Rewrite controlling protocol and fix some bugs" />
     <MESSAGE value="Remote command and add some utils" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remote command and add some utils" />
+    <MESSAGE value="Add shutdown hooks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add shutdown hooks" />
   </component>
 </project>

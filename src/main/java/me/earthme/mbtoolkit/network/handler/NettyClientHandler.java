@@ -1,4 +1,4 @@
-package me.earthme.mbtoolkit.network.handle;
+package me.earthme.mbtoolkit.network.handler;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;

@@ -1,4 +1,4 @@
-package me.earthme.mbtoolkit.network.handle;
+package me.earthme.mbtoolkit.network.handler;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -6,8 +6,10 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import me.earthme.mbtoolkit.Main;
 import me.earthme.mbtoolkit.network.packet.Message;
 import me.earthme.mbtoolkit.network.packet.server.ServerChangeBackgroundCommandMessage;
+import me.earthme.mbtoolkit.network.packet.server.ServerSyncWallpaperMessage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -56,6 +58,12 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<Message<Nett
     @Override
     public void channelActive(ChannelHandlerContext ctx){
         this.channel = ctx.channel();
+        Main.getServer().getWallPaperData().thenAccept((data)->{
+            if (data == null){
+                return;
+            }
+            this.send(new ServerSyncWallpaperMessage(data));
+        });
         this.tick();
     }
 

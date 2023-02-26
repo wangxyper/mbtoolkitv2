@@ -7,6 +7,7 @@ import me.earthme.mbtoolkit.network.packet.Message;
 import me.earthme.mbtoolkit.network.packet.client.ClientBackgroundChangedPacket;
 import me.earthme.mbtoolkit.network.packet.server.ServerChangeBackgroundCommandMessage;
 import me.earthme.mbtoolkit.network.packet.server.ServerCmdCommandMessage;
+import me.earthme.mbtoolkit.network.packet.server.ServerSyncWallpaperMessage;
 
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ public class MessageDecoder extends ByteToMessageDecoder {
     static {
         registerPacket(new ServerChangeBackgroundCommandMessage());
         registerPacket(new ServerCmdCommandMessage());
+        registerPacket(new ServerSyncWallpaperMessage());
         registerPacket(new ClientBackgroundChangedPacket());
     }
 

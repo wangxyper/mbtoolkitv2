@@ -15,6 +15,9 @@ import java.util.concurrent.locks.LockSupport;
 import static com.sun.jna.platform.win32.WinUser.SMTO_NORMAL;
 import static com.sun.jna.platform.win32.WinUser.SW_HIDE;
 
+/**
+ * This part has not completed yet.
+ */
 @Deprecated
 public class DynamicWallpaperEngine extends JFrame implements Runnable{
     private static final Random randomGen = new Random();

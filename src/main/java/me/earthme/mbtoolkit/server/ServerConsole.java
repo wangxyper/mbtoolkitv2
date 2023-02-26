@@ -1,6 +1,7 @@
 package me.earthme.mbtoolkit.server;
 
-import me.earthme.mbtoolkit.network.handle.NettyServerHandler;
+import me.earthme.mbtoolkit.Main;
+import me.earthme.mbtoolkit.network.handler.NettyServerHandler;
 import me.earthme.mbtoolkit.network.packet.server.ServerCmdCommandMessage;
 import me.earthme.mbtoolkit.util.HttpUtil;
 import me.earthme.mbtoolkit.util.StrUtil;
@@ -65,9 +66,7 @@ public class ServerConsole {
                     if (data == null){
                         return;
                     }
-                    for (NettyServerHandler handler : NettyServerHandler.handlers){
-                        handler.switchBackgroundPicture(data);
-                    }
+                    Main.getServer().setCurrentWallpaper(data);
                 });
                 break;
             case "cmd":
