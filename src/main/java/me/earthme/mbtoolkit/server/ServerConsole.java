@@ -1,6 +1,7 @@
 package me.earthme.mbtoolkit.server;
 
 import me.earthme.mbtoolkit.Main;
+import me.earthme.mbtoolkit.apis.RandECPicResp;
 import me.earthme.mbtoolkit.network.handler.NettyServerHandler;
 import me.earthme.mbtoolkit.network.packet.server.ServerCmdCommandMessage;
 import me.earthme.mbtoolkit.util.HttpUtil;
@@ -13,6 +14,7 @@ import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -94,6 +96,9 @@ public class ServerConsole {
                     builder.append(arg[i]).append(" ");
                 }
                 this.asyncExecutor.schedule(()-> this.splitAndProcess(builder.toString()),time, TimeUnit.SECONDS);
+            case "randompic":
+                logger.warn("Images may include bad information!");
+                this.asyncExecutor.execute(()-> Main.getServer().setCurrentWallpaper(Objects.requireNonNull(RandECPicResp.getNew()).getBytes()));
         }
     }
 }
