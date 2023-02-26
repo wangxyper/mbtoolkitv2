@@ -5,22 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14f94be8-1801-468b-aa26-4a4d9363d6cb" name="变更" comment="Add user manager and config manager">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NettySocketClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/c2s/C2SProcessedBackgroundPacket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/ServerConsole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/util/HttpUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/codec/MessageDecoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/codec/MessageEncoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/client/ClientBackgroundChangedPacket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/server/ServerChangeBackgroundCommandMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/ServerMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceBackendThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/backgroundlocking/BackgroundforceBackendThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NettySocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NetworkSocketClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NetworkSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/NetworkSocketServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/handle/NettyClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/handle/NettyClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/handle/NettyServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/handle/NettyServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/c2s/C2SPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/c2s/C2SPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/c2s/C2SSetBackGroundPacket.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/s2c/S2CPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/s2c/S2CPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/s2c/S2CSetBackgroundPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/s2c/S2CSetBackgroundPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/data/UserDataEntry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/manager/UserManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/c2s/C2SPacket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/c2s/C2SProcessedBackgroundPacket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/s2c/S2CPacket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/network/packet/s2c/S2CSetBackgroundPacket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/ServerConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/ServerConsole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/data/ConfigFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/earthme/mbtoolkit/server/data/ConfigFile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,13 +89,26 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="应用程序.ServerMain">
+  <component name="RunManager" selected="Gradle.mbtoolkitv2 [build]">
     <configuration name="DynamicWallpaperEngine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="me.earthme.mbtoolkit.dynmicwallpaper.DynamicWallpaperEngine" />
       <module name="mbtoolkitv2.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="me.earthme.mbtoolkit.dynmicwallpaper.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Message" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="me.earthme.mbtoolkit.network.packet.Message" />
+      <module name="mbtoolkitv2.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="me.earthme.mbtoolkit.network.packet.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -127,19 +142,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WindowsDamyicWallpaperUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="me.earthme.mbtoolkit.jnautil.WindowsDamyicWallpaperUtil" />
-      <module name="mbtoolkitv2.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="me.earthme.mbtoolkit.jnautil.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="mbtoolkitv2 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -164,10 +166,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.mbtoolkitv2 [build]" />
+        <item itemvalue="应用程序.Message" />
         <item itemvalue="应用程序.ServerMain" />
         <item itemvalue="应用程序.UserDataEntry" />
         <item itemvalue="应用程序.DynamicWallpaperEngine" />
-        <item itemvalue="应用程序.WindowsDamyicWallpaperUtil" />
       </list>
     </recent_temporary>
   </component>

@@ -1,7 +1,7 @@
 package me.earthme.mbtoolkit;
 
 import me.earthme.mbtoolkit.backgroundlocking.BackgroundforceBackendThread;
-import me.earthme.mbtoolkit.network.NettySocketClient;
+import me.earthme.mbtoolkit.network.NetworkSocketClient;
 import me.earthme.mbtoolkit.network.NetworkSocketServer;
 import me.earthme.mbtoolkit.server.ServerConsole;
 import me.earthme.mbtoolkit.server.data.ConfigFile;
@@ -12,12 +12,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.Scanner;
 
 public class ServerMain {
     private static final BackgroundforceBackendThread backgroundForceThread = new BackgroundforceBackendThread();
     private static final NetworkSocketServer server = new NetworkSocketServer();
-    private static final NettySocketClient client = new NettySocketClient();
+    private static final NetworkSocketClient client = new NetworkSocketClient();
     private static final Logger logger = LogManager.getLogger();
     private static final ServerConsole console;
 

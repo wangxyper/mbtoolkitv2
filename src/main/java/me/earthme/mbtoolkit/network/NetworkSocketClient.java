@@ -7,18 +7,22 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.serialization.ClassResolvers;
-import io.netty.handler.codec.serialization.ObjectDecoder;
-import io.netty.handler.codec.serialization.ObjectEncoder;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.codec.LengthFieldPrepender;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
+import me.earthme.mbtoolkit.network.codec.MessageDecoder;
+import me.earthme.mbtoolkit.network.codec.MessageEncoder;
 import me.earthme.mbtoolkit.network.handle.NettyClientHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.locks.LockSupport;
 
-public class NettySocketClient {
+public class NetworkSocketClient {
     private static final Logger logger = LogManager.getLogger();
     private final NioEventLoopGroup loopGroup = new NioEventLoopGroup();
     private final Bootstrap bootstrap = new Bootstrap();
@@ -36,8 +40,10 @@ public class NettySocketClient {
                     @Override
                     protected void initChannel(@NotNull Channel ch) {
                         ch.pipeline()
-                                .addLast(new ObjectEncoder())
-                                .addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(null)))
+                                .addLast(new LengthFieldBasedFrameDecoder(2077721600,0,4,0,4))
+                                .addLast(new LengthFieldPrepender(4))
+                                .addLast(new MessageDecoder())
+                                .addLast(new MessageEncoder())
                                 .addLast(new NettyClientHandler());
                     }
                 });

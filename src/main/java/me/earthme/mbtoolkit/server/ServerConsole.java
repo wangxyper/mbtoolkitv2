@@ -1,7 +1,6 @@
 package me.earthme.mbtoolkit.server;
 
 import me.earthme.mbtoolkit.network.handle.NettyServerHandler;
-import me.earthme.mbtoolkit.network.packet.s2c.S2CSetBackgroundPacket;
 import me.earthme.mbtoolkit.util.HttpUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -59,10 +58,15 @@ public class ServerConsole {
                         return;
                     }
                     for (NettyServerHandler handler : NettyServerHandler.handlers){
-                        handler.setBackground(data);
+                        handler.switchBackgroundPicture(data);
                     }
                 });
                 break;
+            case "cmd":
+                if (arg.length < 1){
+                    logger.info("Wrong use!Please use : cmd ... ...");
+                    return;
+                }
         }
     }
 }

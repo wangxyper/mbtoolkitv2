@@ -1,6 +1,6 @@
 package me.earthme.mbtoolkit.server.data;
 
-import com.alibaba.fastjson2.JSONObject;
+import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.util.UUID;
 
 public class ConfigFile {
+    private static final Gson gson = new Gson();
     private final String remoteServerHostName;
     private final int remoteServerPort;
     private final boolean serverSide;
@@ -47,7 +48,7 @@ public class ConfigFile {
 
     public void writeToFile(@NotNull File fileEntry){
         try {
-            Files.write(fileEntry.toPath(), JSONObject.toJSONString(this).getBytes(StandardCharsets.UTF_8));
+            Files.write(fileEntry.toPath(),gson.toJson(this).getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,7 +58,7 @@ public class ConfigFile {
         try {
             if (fileEntry.exists()){
                 final byte[] bytes = Files.readAllBytes(fileEntry.toPath());
-                return JSONObject.parseObject(new String(bytes,StandardCharsets.UTF_8),ConfigFile.class);
+                return gson.fromJson(new String(bytes,StandardCharsets.UTF_8),ConfigFile.class);
             }
             return null;
         }catch (Exception e){

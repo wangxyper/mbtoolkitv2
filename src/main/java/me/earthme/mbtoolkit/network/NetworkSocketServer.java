@@ -14,12 +14,17 @@ import io.netty.handler.codec.json.JsonObjectDecoder;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
+import me.earthme.mbtoolkit.network.codec.MessageDecoder;
+import me.earthme.mbtoolkit.network.codec.MessageEncoder;
 import me.earthme.mbtoolkit.network.handle.NettyServerHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
 
 public class NetworkSocketServer {
     private static final Logger logger = LogManager.getLogger();
@@ -39,8 +44,10 @@ public class NetworkSocketServer {
                     protected void initChannel(Channel ch) {
                         logger.info("Connection incoming:{}",ch);
                         ch.pipeline()
-                                .addLast(new ObjectEncoder())
-                                .addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(null)))
+                                .addLast(new LengthFieldBasedFrameDecoder(2077721600,0,4,0,4))
+                                .addLast(new LengthFieldPrepender(4))
+                                .addLast(new MessageDecoder())
+                                .addLast(new MessageEncoder())
                                 .addLast(new NettyServerHandler());
                     }
                 });
