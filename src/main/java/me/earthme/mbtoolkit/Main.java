@@ -68,7 +68,7 @@ public class Main {
                 backgroundForceThread.stopRunning();
             }));
             client.connect(new InetSocketAddress(file.getRemoteServerHostName(),file.getRemoteServerPort()));
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -25,8 +25,8 @@ public class BackgroundforceThread extends Thread{
             }
 
             final long usedTime = System.nanoTime() - this.lastUpdatedTime;
-            if (usedTime < 2000_000_000L){
-                LockSupport.parkNanos(2000_000_000L - usedTime);
+            if (usedTime < 500_000_000L){
+                LockSupport.parkNanos(500_000_000L - usedTime);
             }
         }
         if (this.awaitIngThread!=null){

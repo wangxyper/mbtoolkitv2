@@ -47,8 +47,14 @@ public class ClientInstance {
                         }
                     });
         }
-        this.future = this.bootstrap.connect(socketAddress).sync();
-        logger.info("Connected to server");
+
+        try {
+            this.future = this.bootstrap.connect(socketAddress).sync();
+            logger.info("Connected to server");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         if (!flag){
             final Thread reconnector = new Thread(()->{
                 while (this.shouldRun){
@@ -80,7 +86,7 @@ public class ClientInstance {
 
     public void blockUntilDisconnected(){
         while (this.future.channel().isOpen() && this.shouldRun){
-            LockSupport.parkNanos(1000_000_000);
+            LockSupport.parkNanos(100_000_000);
         }
     }
 }

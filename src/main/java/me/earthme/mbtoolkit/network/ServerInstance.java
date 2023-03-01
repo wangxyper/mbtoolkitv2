@@ -29,6 +29,8 @@ public class ServerInstance {
     private ChannelFuture channelFuture;
 
     private final File currentWallpaper = new File("wp.mbcache");
+    private byte[] currentWallpaperCache = null;
+    private final Object cacheLock = new Object();
 
     public void start(@NotNull InetSocketAddress address){
         ServerBootstrap serverBootstrap = new ServerBootstrap();
@@ -65,6 +67,10 @@ public class ServerInstance {
 
     public void setCurrentWallpaper(byte[] data){
         try {
+            synchronized (this.cacheLock){
+                this.currentWallpaperCache = data;
+            }
+
             Files.write(this.currentWallpaper.toPath(),data);
 
             for (NettyServerHandler handler : NettyServerHandler.handlers){
@@ -80,10 +86,15 @@ public class ServerInstance {
             if (!this.currentWallpaper.exists()){
                 return null;
             }
-            try {
-                return Files.readAllBytes(this.currentWallpaper.toPath());
-            } catch (IOException e) {
-                e.printStackTrace();
+            synchronized (this.cacheLock){
+                if (this.currentWallpaperCache != null){
+                    return this.currentWallpaperCache;
+                }
+                try {
+                    return (this.currentWallpaperCache = Files.readAllBytes(this.currentWallpaper.toPath()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             return null;
         });
