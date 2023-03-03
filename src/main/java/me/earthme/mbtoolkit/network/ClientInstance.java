@@ -28,7 +28,7 @@ public class ClientInstance {
     private boolean flag = false;
     private volatile boolean shouldRun = true;
 
-    public void connect(InetSocketAddress socketAddress) throws InterruptedException {
+    public void connect(InetSocketAddress socketAddress) {
         this.lastAddress = socketAddress;
         if (!this.flag){
             this.bootstrap.group(this.loopGroup)
@@ -56,7 +56,7 @@ public class ClientInstance {
         }
 
         if (!flag){
-            final Thread reconnector = new Thread(()->{
+            final Thread reconnectThread = new Thread(()->{
                 while (this.shouldRun){
                     try {
                         this.blockUntilDisconnected();
@@ -71,9 +71,9 @@ public class ClientInstance {
                     }
                 }
             });
-            reconnector.setPriority(3);
-            reconnector.setDaemon(true);
-            reconnector.start();
+            reconnectThread.setPriority(3);
+            reconnectThread.setDaemon(true);
+            reconnectThread.start();
             flag = true;
         }
     }

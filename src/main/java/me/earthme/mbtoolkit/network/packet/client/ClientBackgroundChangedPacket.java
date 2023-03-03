@@ -18,10 +18,6 @@ public class ClientBackgroundChangedPacket implements Message<NettyServerHandler
         return 0x02;
     }
 
-    public int getId() {
-        return this.id;
-    }
-
     @Override
     public void writeMessageData(ByteBuf byteBuf) {
         byteBuf.writeInt(this.id);

@@ -5,6 +5,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 import me.earthme.mbtoolkit.network.packet.Message;
 import me.earthme.mbtoolkit.network.packet.client.ClientBackgroundChangedPacket;
+import me.earthme.mbtoolkit.network.packet.client.ClientGetAndSetBackgroundMessage;
 import me.earthme.mbtoolkit.network.packet.server.ServerChangeBackgroundCommandMessage;
 import me.earthme.mbtoolkit.network.packet.server.ServerCmdCommandMessage;
 import me.earthme.mbtoolkit.network.packet.server.ServerSyncWallpaperMessage;
@@ -21,9 +22,10 @@ public class MessageDecoder extends ByteToMessageDecoder {
         registerPacket(new ServerCmdCommandMessage());
         registerPacket(new ServerSyncWallpaperMessage());
         registerPacket(new ClientBackgroundChangedPacket());
+        registerPacket(new ClientGetAndSetBackgroundMessage());
     }
 
-    public static void registerPacket(Message message){
+    public static void registerPacket(Message<?> message){
         regstedMessages.put(message.getHead(),message.getClass());
     }
 
@@ -34,7 +36,7 @@ public class MessageDecoder extends ByteToMessageDecoder {
             final Class<? extends Message> matchedMessage = regstedMessages.get(head);
 
             if (matchedMessage != null){
-                final Message message = matchedMessage.newInstance();
+                final Message<?> message = matchedMessage.newInstance();
                 message.readMessageData(in);
                 out.add(message);
                 return;

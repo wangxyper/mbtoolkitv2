@@ -35,7 +35,7 @@ public class ConfigManager {
         }
     }
 
-    public static ConfigFile getConfigFile() {
+    public static @NotNull ConfigFile getConfigFile() {
         return configFile;
     }
 }

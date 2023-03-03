@@ -7,6 +7,7 @@ import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import me.earthme.mbtoolkit.Main;
+import me.earthme.mbtoolkit.network.ServerInstance;
 import me.earthme.mbtoolkit.network.packet.Message;
 import me.earthme.mbtoolkit.network.packet.server.ServerChangeBackgroundCommandMessage;
 import me.earthme.mbtoolkit.network.packet.server.ServerSyncWallpaperMessage;
@@ -22,11 +23,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.locks.LockSupport;
 
 public class NettyServerHandler extends SimpleChannelInboundHandler<Message<NettyServerHandler>>{
-
     private static final ChannelGroup connectedClients = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     private static final ExecutorService loopWorker = Executors.newCachedThreadPool();
     public static final List<NettyServerHandler> handlers = new CopyOnWriteArrayList<>();
 
+    private final ServerInstance serverInstance;
     private final Random random = new Random();
     private int lastBgId = -1;
     private boolean lastBgProcessed = false;
@@ -37,15 +38,19 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<Message<Nett
     private final Queue<Runnable> tasks = new ConcurrentLinkedQueue<>();
     private final Queue<Message<NettyServerHandler>> messages = new ConcurrentLinkedQueue<>();
 
-    public NettyServerHandler(){
+    public NettyServerHandler(ServerInstance serverInstance){
+        this.serverInstance = serverInstance;
         handlers.add(this);
+    }
+
+    public ServerInstance getServerInstance(){
+        return this.serverInstance;
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Message<NettyServerHandler> msg) {
         this.messages.offer(msg);
     }
-
 
     public static ChannelGroup getConnectedClients() {
         return connectedClients;

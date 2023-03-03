@@ -18,6 +18,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<Message<Nett
         this.channel = ctx.channel();
     }
 
+    @Deprecated
     public Channel getChannel() {
         return this.channel;
     }

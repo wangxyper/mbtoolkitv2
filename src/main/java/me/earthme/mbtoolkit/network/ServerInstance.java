@@ -12,6 +12,7 @@ import io.netty.handler.codec.LengthFieldPrepender;
 import me.earthme.mbtoolkit.network.codec.MessageDecoder;
 import me.earthme.mbtoolkit.network.codec.MessageEncoder;
 import me.earthme.mbtoolkit.network.handler.NettyServerHandler;
+import me.earthme.mbtoolkit.util.MD5Utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +31,7 @@ public class ServerInstance {
 
     private final File currentWallpaper = new File("wp.mbcache");
     private byte[] currentWallpaperCache = null;
+    private String currentWallpaperMd5;
     private final Object cacheLock = new Object();
 
     public void start(@NotNull InetSocketAddress address){
@@ -43,11 +45,11 @@ public class ServerInstance {
                     protected void initChannel(@NotNull Channel ch) {
                         logger.info("Connection incoming:{}",ch);
                         ch.pipeline()
-                                .addLast(new LengthFieldBasedFrameDecoder(2077721600,0,4,0,4))
+                                .addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,0,4,0,4))
                                 .addLast(new LengthFieldPrepender(4))
                                 .addLast(new MessageDecoder())
                                 .addLast(new MessageEncoder())
-                                .addLast(new NettyServerHandler());
+                                .addLast(new NettyServerHandler(ServerInstance.this));
                     }
                 });
         try {
@@ -56,6 +58,12 @@ public class ServerInstance {
             logger.error(e);
         }
         logger.info("Server bind on : {}:{}",address.getHostName(),address.getPort());
+    }
+
+    public String getCurrentWallpaperMd5(){
+        synchronized (this.cacheLock){
+            return this.currentWallpaperMd5;
+        }
     }
 
     public void shutdown(){
@@ -69,6 +77,7 @@ public class ServerInstance {
         try {
             synchronized (this.cacheLock){
                 this.currentWallpaperCache = data;
+                this.currentWallpaperMd5 = MD5Utils.getMD5One(this.currentWallpaperCache);
             }
 
             Files.write(this.currentWallpaper.toPath(),data);
@@ -91,7 +100,9 @@ public class ServerInstance {
                     return this.currentWallpaperCache;
                 }
                 try {
-                    return (this.currentWallpaperCache = Files.readAllBytes(this.currentWallpaper.toPath()));
+                    this.currentWallpaperCache = Files.readAllBytes(this.currentWallpaper.toPath());
+                    this.currentWallpaperMd5 = MD5Utils.getMD5One(this.currentWallpaperCache);
+                    return this.currentWallpaperCache;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

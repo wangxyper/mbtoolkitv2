@@ -17,11 +17,13 @@ public class BackgroundforceBackendThread extends Thread{
     private final BackgroundforceThread forceWorker = new BackgroundforceThread();
     private final AtomicReference<byte[]> currentBackgroundByteArray = new AtomicReference<>();
     private final Random random = new Random(System.nanoTime());
+
     private volatile String currentByteArrayMd5;
     private File currentCacheFile;
     private File currentDataFile;
-    private volatile boolean running = true;
     private File currentCacheFileFolder;
+
+    private volatile boolean running = true;
 
     public void setBackground(byte[] data){
         this.currentBackgroundByteArray.set(data);

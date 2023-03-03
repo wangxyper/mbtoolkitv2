@@ -71,6 +71,7 @@ public class ServerConsole {
                     Main.getServer().setCurrentWallpaper(data);
                 });
                 break;
+
             case "cmd":
                 if (arg.length < 1){
                     logger.info("Wrong use!Please use : cmd ... ...");

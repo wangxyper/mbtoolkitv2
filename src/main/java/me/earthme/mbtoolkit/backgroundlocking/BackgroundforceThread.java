@@ -1,22 +1,16 @@
 package me.earthme.mbtoolkit.backgroundlocking;
 
 import me.earthme.mbtoolkit.jnautil.WindowsDesktopWallpaperUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.LockSupport;
 
 public class BackgroundforceThread extends Thread{
     private final AtomicReference<String> currentWallpaper = new AtomicReference<>();
-    private long lastUpdatedTime;
-    private volatile boolean running = true;
-    private volatile Thread awaitIngThread;
 
     @Override
     public void run(){
-        while (this.running){
-            this.lastUpdatedTime = System.nanoTime();
+        while (Thread.currentThread().isInterrupted()){
+            long lastUpdatedTime = System.nanoTime();
 
             try {
                 this.doUpdate();
@@ -24,27 +18,14 @@ public class BackgroundforceThread extends Thread{
                 e.printStackTrace();
             }
 
-            final long usedTime = System.nanoTime() - this.lastUpdatedTime;
+            final long usedTime = System.nanoTime() - lastUpdatedTime;
             if (usedTime < 500_000_000L){
                 LockSupport.parkNanos(500_000_000L - usedTime);
             }
         }
-        if (this.awaitIngThread!=null){
-            LockSupport.unpark(this.awaitIngThread);
-        }
-    }
-
-    public long getLastUpdatedTime(){
-        return this.lastUpdatedTime;
-    }
-
-    public void awaitExit(){
-        this.awaitIngThread = Thread.currentThread();
-        LockSupport.park();
     }
 
     public void stopRunning(){
-        this.running = false;
     }
 
     public void setForcing(String path){

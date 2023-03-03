@@ -15,17 +15,20 @@ import java.net.InetSocketAddress;
 
 public class Main {
     private static final BackgroundforceBackendThread backgroundForceThread = new BackgroundforceBackendThread();
-    private static final ServerInstance server = new ServerInstance();
-    private static final ClientInstance client = new ClientInstance();
+    private static ServerInstance server;
+    private static ClientInstance client;
     private static final Logger logger = LogManager.getLogger();
     private static final ServerConsole console;
 
     static {
+        ServerConsole console1;
         try {
-            console = new ServerConsole();
+            console1 = new ServerConsole();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            console1 = null;
         }
+        console = console1;
     }
 
     public static ServerInstance getServer() {
@@ -53,20 +56,27 @@ public class Main {
 
     public static void initServerSide(ConfigFile file){
         logger.info("Server side init");
+        server = new ServerInstance();
         server.start(new InetSocketAddress(file.getRemoteServerHostName(),file.getRemoteServerPort()));
         Runtime.getRuntime().addShutdownHook(new Thread(server::shutdown));
-        console.blockAndRunConsole();
-        System.exit(0);
+        if (console!=null){
+            console.blockAndRunConsole();
+            System.exit(0);
+        }else {
+            logger.error("Can not start console!Exiting!");
+            System.exit(-1);
+        }
     }
 
     public static void initClientSide(ConfigFile file){
         logger.info("Client side init");
+        client = new ClientInstance();
         backgroundForceThread.start();
+        Runtime.getRuntime().addShutdownHook(new Thread(()->{
+            client.shutdown();
+            backgroundForceThread.stopRunning();
+        }));
         try {
-            Runtime.getRuntime().addShutdownHook(new Thread(()->{
-                client.shutdown();
-                backgroundForceThread.stopRunning();
-            }));
             client.connect(new InetSocketAddress(file.getRemoteServerHostName(),file.getRemoteServerPort()));
         } catch (Exception e) {
             e.printStackTrace();
